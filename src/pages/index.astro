@@ -1,54 +1,57 @@
 ---
-import TimeSelector from '../components/TimeSelector.astro';
-import Layout from '../layouts/Layout.astro';
+import TimeSelector from "../components/TimeSelector.astro";
+import Layout from "../layouts/Layout.astro";
 ---
 
 <Layout title="Pomodoro Timer 🍅">
-	<main>
-		<div class="background-animation" />
-		<h1 class="text-center mb-16 font-extrabold italic text-[40px] onLoadAnimation1">POMODORO TIMER 🍅</h1>
-			<TimeSelector />
-		</div>
-	</main>
+  <main>
+    <div class="background-animation"></div>
+    <h1
+      class="text-center mb-16 font-extrabold italic text-[40px] onLoadAnimation1"
+    >
+      POMODORO TIMER 🍅
+    </h1>
+    <TimeSelector />
+  </main>
 </Layout>
 
 <style>
-	main {
-		margin: auto;
-		padding:5rem 1rem 1rem 1rem;
-		width: 900px;
-		max-width: calc(100% - 2rem);
-		color: white;
-		font-size: 20px;
-		line-height: 1.6;
-	}
-	.onLoadAnimation1 {  
-	  animation: 2s showAtLoad ease
-	}
-	.onLoadAnimation2 {  
-	  animation: 4s showAtLoad ease
-	}
-	.onLoadAnimation3 {  
-	  animation: 6s showAtLoad ease
-	}
+  main {
+    margin: auto;
+    padding: 5rem 1rem 1rem 1rem;
+    width: 900px;
+    max-width: calc(100% - 2rem);
+    color: white;
+    font-size: 20px;
+    line-height: 1.6;
+  }
+  .onLoadAnimation1 {
+    animation: 2s showAtLoad ease;
+  }
+  .onLoadAnimation2 {
+    animation: 4s showAtLoad ease;
+  }
+  .onLoadAnimation3 {
+    animation: 6s showAtLoad ease;
+  }
 
-	.background-animation {
-        position: absolute;
-        width: 50vh;
-        height: 60vh;
-        filter: blur(300px);
-        border-radius: 70%;
-        pointer-events: none;
-        z-index: 1;
-        background: rgba(40, 124, 113, 0.7);
+  .background-animation {
+    position: absolute;
+    width: 50vh;
+    height: 60vh;
+    filter: blur(300px);
+    border-radius: 70%;
+    pointer-events: none;
+    z-index: 1;
+    background: rgba(40, 124, 113, 0.7);
+  }
+
+  @keyframes showAtLoad {
+    0% {
+      opacity: 0;
     }
-
-	@keyframes showAtLoad {
-  		0% {
-  		  opacity: 0;
-  		}
-  		100% {
-  		  opacity: 1;
-  		}
-	}
+    100% {
+      opacity: 1;
+    }
+  }
 </style>

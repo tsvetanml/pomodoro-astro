@@ -1,98 +1,132 @@
 <div class="time-selector">
-    <p class="text-center mb-8 font-bold italic onLoadAnimation2 onLoadAnimation2Hide">SELECT YOUR SKILL LEVEL</p>
-    <div class="onLoadAnimation3 onLoadAnimation3Hide">
-        <div class="flex justify-between">
-            <div class="option-button bg-gray-400/[.20] border-white font-bold italic text-black rounded-xl py-3 px-6" data-bg-color="#4d2307">
-                <p class="text-center text-white mb-5">BEGINNER</p>
-                <button id="beginner-btn" class="option-button-content text-center bg-white-400/[.20]  border-white/[.80] hover:bg-slate-800 hover:border-slate-800 font-bold border-2 italic text-white/[.90] py-2 px-16 rounded-xl text-lg" data-duration="15:00">15:00</button>
-            </div>
-            <div class="option-button bg-gray-400/[.20] border-white font-bold italic text-black rounded-xl py-3 px-6" data-bg-color="#003923">
-                <p class="text-center text-white mb-5">INTERMEDIATE</p>
-                <button id="intermediate-btn" class="option-button-content text-center bg-white-400/[.20]  border-white/[.80] hover:bg-slate-800 hover:border-slate-800 font-bold border-2 italic text-white/[.90] py-2 px-16 rounded-xl text-lg" data-duration="25:00">25:00</button>
-            </div>
-            <div class="option-button bg-gray-400/[.20] border-white font-bold italic text-black rounded-xl py-3 px-6" data-bg-color="#392300">
-                <p class="text-center text-white mb-5">ADVANCED</p>
-                <button id="advanced-btn" class="option-button-content text-center bg-white-400/[.20]  border-white/[.80] hover:bg-slate-800 hover:border-slate-800 font-bold border-2 italic text-white/[.90] py-2 px-16 rounded-xl text-lg" data-duration="35:00">35:00</button>
-            </div>
-        </div>
+  <p
+    class="text-center mb-8 font-bold italic onLoadAnimation2 onLoadAnimation2Hide"
+  >
+    SELECT YOUR SKILL LEVEL
+  </p>
+  <div class="onLoadAnimation3 onLoadAnimation3Hide">
+    <div class="flex justify-between">
+      <div
+        class="option-button bg-gray-400/[.20] border-white font-bold italic text-black rounded-xl py-3 px-6"
+        data-bg-color="#4d2307"
+      >
+        <p class="text-center text-white mb-5">BEGINNER</p>
+        <button
+          id="beginner-btn"
+          class="option-button-content text-center bg-white-400/[.20] border-white/[.80] hover:bg-slate-800 hover:border-slate-800 font-bold border-2 italic text-white/[.90] py-2 px-16 rounded-xl text-lg"
+          data-duration="15:00">15:00</button
+        >
+      </div>
+      <div
+        class="option-button bg-gray-400/[.20] border-white font-bold italic text-black rounded-xl py-3 px-6"
+        data-bg-color="#003923"
+      >
+        <p class="text-center text-white mb-5">INTERMEDIATE</p>
+        <button
+          id="intermediate-btn"
+          class="option-button-content text-center bg-white-400/[.20] border-white/[.80] hover:bg-slate-800 hover:border-slate-800 font-bold border-2 italic text-white/[.90] py-2 px-16 rounded-xl text-lg"
+          data-duration="25:00">25:00</button
+        >
+      </div>
+      <div
+        class="option-button bg-gray-400/[.20] border-white font-bold italic text-black rounded-xl py-3 px-6"
+        data-bg-color="#392300"
+      >
+        <p class="text-center text-white mb-5">ADVANCED</p>
+        <button
+          id="advanced-btn"
+          class="option-button-content text-center bg-white-400/[.20] border-white/[.80] hover:bg-slate-800 hover:border-slate-800 font-bold border-2 italic text-white/[.90] py-2 px-16 rounded-xl text-lg"
+          data-duration="35:00">35:00</button
+        >
+      </div>
     </div>
+  </div>
 </div>
 <div id="time-box" class="time-box text-center opacity-0">
-    <span id="time" class="text-[112px] italic font-extrabold">25:00</span>
+  <span id="time" class="text-[112px] italic font-extrabold">25:00</span>
 </div>
 
 <script>
-    const root = document.documentElement;
-    const optionButtons = document.querySelectorAll('.option-button');
-    const timeSelectorClass = document.querySelector('.time-selector');
-    const timeBoxClass = document.querySelector('.time-box');
-    let timeEnd = null;
+  const root: any = document.documentElement;
+  const optionButtons: any = document.querySelectorAll(".option-button");
+  const timeSelectorClass: any = document.querySelector(".time-selector");
+  const timeBoxClass: any = document.querySelector(".time-box");
+  const timeClass: any = document.getElementById("time");
+  let timeEnd: any = false;
 
-    optionButtons.forEach(button => {
-        button.addEventListener('mouseover', () => {
-            root.style.setProperty('--bg-color', button.getAttribute('data-bg-color'));
-        });
-
-        // button.addEventListener('mouseout', () => {
-        //     root.style.setProperty('--bg-color', '#23074d');
-        // });
-
-        button.querySelector('.option-button-content').addEventListener('click', () => {
-            root.style.setProperty('--bg-color', button.getAttribute('data-bg-color'));
-            const duration = button.querySelector('.option-button-content').getAttribute('data-duration');
-            document.getElementById('time').textContent = duration;
-            console.log('Duración seleccionada:', duration);
-            timeSelectorClass.classList.toggle('hide');
-            timeBoxClass.classList.toggle('show');
-            startTime(duration);
-        });
-
-        const startTime = async (duration) => {
-            timeEnd = new Date(Date.now() + duration.split(':')[0]*60000)
-            const timeInterval = setInterval(updateTime, 1000)
-        }
-
-        const updateTime = () => {
-            const elapsedTime = Date.now() - 600;
-            const distance = timeEnd - elapsedTime;
-            const mins = Math.floor((distance / (1000 * 60)) % 60);
-            const secs = Math.floor((distance / 1000) % 60);
-            const formattedMins = mins.toString().padStart(2, '0');
-            const formattedSecs = secs.toString().padStart(2, '0');
-            const timeText = `${formattedMins}:${formattedSecs}`;
-            document.getElementById('time').textContent = timeText;
-        }
+  optionButtons.forEach((button: any) => {
+    button.addEventListener("mouseover", () => {
+      root.style.setProperty(
+        "--bg-color",
+        button.getAttribute("data-bg-color")
+      );
     });
+
+    // button.addEventListener('mouseout', () => {
+    //     root.style.setProperty('--bg-color', '#23074d');
+    // });
+
+    button
+      .querySelector(".option-button-content")
+      .addEventListener("click", () => {
+        root.style.setProperty(
+          "--bg-color",
+          button.getAttribute("data-bg-color")
+        );
+        const duration = button
+          .querySelector(".option-button-content")
+          .getAttribute("data-duration");
+        timeClass.textContent = duration;
+        console.log("Duración seleccionada:", duration);
+        timeSelectorClass.classList.toggle("hide");
+        timeBoxClass.classList.toggle("show");
+        startTime(duration);
+      });
+
+    const startTime = async (duration: string) => {
+      timeEnd = new Date(Date.now() + +duration.split(":")[0] * 60000);
+      setInterval(updateTime, 1000);
+    };
+
+    const updateTime = () => {
+      const elapsedTime = Date.now() - 600;
+      const distance = timeEnd - elapsedTime;
+      const mins = Math.floor((distance / (1000 * 60)) % 60);
+      const secs = Math.floor((distance / 1000) % 60);
+      const formattedMins = mins.toString().padStart(2, "0");
+      const formattedSecs = secs.toString().padStart(2, "0");
+      const timeText = `${formattedMins}:${formattedSecs}`;
+      timeClass.textContent = timeText;
+    };
+  });
 </script>
 
 <style>
-    .onLoadAnimation2 {  
-	  animation: 4s showAtLoad ease
-	}
-   
-	.onLoadAnimation3 {  
-	  animation: 6s showAtLoad ease
-	}
+  .onLoadAnimation2 {
+    animation: 4s showAtLoad ease;
+  }
 
-    .time-selector.hide{
-        transition: all 1s ease-out;
-        opacity: 0;
-        visibility: hidden;  
-    }
+  .onLoadAnimation3 {
+    animation: 6s showAtLoad ease;
+  }
 
-     .time-box.show{
-        transition: all 4s ease;
-        opacity: 1;  
+  .time-selector.hide {
+    transition: all 1s ease-out;
+    opacity: 0;
+    visibility: hidden;
+  }
+
+  .time-box.show {
+    transition: all 4s ease;
+    opacity: 1;
+  }
+
+  @keyframes showAtLoad {
+    0% {
+      opacity: 0;
     }
-    
-    
-   
-    @keyframes showAtLoad {
-  		0% {
-  		  opacity: 0;
-  		}
-  		100% {
-  		  opacity: 1;
-  		}
-	}
+    100% {
+      opacity: 1;
+    }
+  }
 </style>
