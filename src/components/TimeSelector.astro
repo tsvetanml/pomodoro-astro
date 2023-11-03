@@ -1,6 +1,6 @@
 <div class="time-selector">
   <p
-    class="text-center mb-8 font-bold italic onLoadAnimation2 onLoadAnimation2Hide"
+    class="text-center mb-4 font-bold italic onLoadAnimation2 onLoadAnimation2Hide"
   >
     SELECT YOUR SKILL LEVEL
   </p>
@@ -41,6 +41,47 @@
       </div>
     </div>
   </div>
+
+  <div id="rest-box" class="rest-box opacity-0">
+    <p class="text-center mb-4 mt-4 font-bold italic">
+      SELECT YOUR REST TIME
+    </p>
+    <div class="flex justify-between">
+      <div
+        class="option-button bg-gray-400/[.20] border-white font-bold italic text-black rounded-xl py-3 px-6"
+        data-bg-color="#4d2307"
+      >
+        <p class="text-center text-white mb-5">BEGINNER</p>
+        <button
+          id="beginner-btn"
+          class="option-button-content text-center bg-white-400/[.20] border-white/[.80] hover:bg-slate-800 hover:border-slate-800 font-bold border-2 italic text-white/[.90] py-2 px-16 rounded-xl text-lg"
+          data-duration="15:00">07:30</button
+        >
+      </div>
+      <div
+        class="option-button bg-gray-400/[.20] border-white font-bold italic text-black rounded-xl py-3 px-6"
+        data-bg-color="#003923"
+      >
+        <p class="text-center text-white mb-5">INTERMEDIATE</p>
+        <button
+          id="intermediate-btn"
+          class="option-button-content text-center bg-white-400/[.20] border-white/[.80] hover:bg-slate-800 hover:border-slate-800 font-bold border-2 italic text-white/[.90] py-2 px-16 rounded-xl text-lg"
+          data-duration="25:00">5:00</button
+        >
+      </div>
+      <div
+        class="option-button bg-gray-400/[.20] border-white font-bold italic text-black rounded-xl py-3 px-6"
+        data-bg-color="#392300"
+      >
+        <p class="text-center text-white mb-5">ADVANCED</p>
+        <button
+          id="advanced-btn"
+          class="option-button-content text-center bg-white-400/[.20] border-white/[.80] hover:bg-slate-800 hover:border-slate-800 font-bold border-2 italic text-white/[.90] py-2 px-16 rounded-xl text-lg"
+          data-duration="35:00">03:00</button
+        >
+      </div>
+    </div>
+  </div>
 </div>
 <div id="time-box" class="time-box text-center opacity-0">
   <span id="time" class="text-[112px] italic font-extrabold">25:00</span>
@@ -51,6 +92,7 @@
   const optionButtons: any = document.querySelectorAll(".option-button");
   const timeSelectorClass: any = document.querySelector(".time-selector");
   const timeBoxClass: any = document.querySelector(".time-box");
+  const restBoxClass: any = document.querySelector(".rest-box");
   const timeClass: any = document.getElementById("time");
   let timeEnd: any = false;
 
@@ -81,6 +123,7 @@
         timeSelectorClass.classList.toggle("hide");
         timeBoxClass.classList.toggle("show");
         startTime(duration);
+        // restBoxClass.classList.toggle("show");
       });
 
     const startTime = async (duration: string) => {
@@ -117,6 +160,11 @@
   }
 
   .time-box.show {
+    transition: all 4s ease;
+    opacity: 1;
+  }
+
+  .rest-box.show {
     transition: all 4s ease;
     opacity: 1;
   }
