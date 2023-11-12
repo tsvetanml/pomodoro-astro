@@ -22,7 +22,7 @@ const { title } = Astro.props;
 </html>
 <style is:global>
   :root {
-    --bg-color: #23074d;
+    --bg-color: #282729;
     --bg-color-webkit: -webkit-linear-gradient(to bottom, #cc5333, #23074d);
     --bg-color-gradient: linear-gradient(to bottom, #cc5333, #23074d);
   }
@@ -30,11 +30,16 @@ const { title } = Astro.props;
   html {
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     height: 100vh;
-    background: var(--bg-color);
-    -webkit-transition: background-color 500ms linear;
+    /* background: var(--bg-color); */
+    /* -webkit-transition: background-color 500ms linear;
     -ms-transition: background-color 500ms linear;
-    transition: background-color 500ms linear;
+    transition: background-color 500ms linear; */
+    background-image: url('/background-images/playa.jpg');
+    background-size: cover;
+    padding:0;
+    margin:0;
   }
+
   code {
     font-family:
       Menlo,

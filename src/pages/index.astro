@@ -1,17 +1,19 @@
 ---
+import CircularTimer from "../components/CircularTimer.astro";
 import TimeSelector from "../components/TimeSelector.astro";
 import Layout from "../layouts/Layout.astro";
 ---
 
-<Layout title="Pomodoro Timer 🍅">
+<Layout title="Pomodoro Timer">
   <main>
-    <div class="background-animation"></div>
+    <!-- <div class="background-animation"></div>
     <h1
       class="text-center mb-4 font-extrabold italic text-[40px] onLoadAnimation1"
     >
       POMODORO TIMER 🍅
     </h1>
-    <TimeSelector />
+    <TimeSelector /> -->
+<CircularTimer></CircularTimer>
   </main>
 </Layout>
 

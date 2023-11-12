@@ -1,0 +1,108 @@
+<div class="timer-body">
+  <div class="timer-container">
+    <div class="timer">
+      <div class="timer-background"></div>
+      <div class="timer-text">25:00</div>
+      <button id="startButton">Start</button>
+    </div>
+  </div>
+</div>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const timerBackground = document.querySelector(
+      ".timer-background"
+    ) as HTMLElement;
+    const timerText = document.querySelector(".timer-text") as HTMLElement;
+    const timerBall = document.querySelector(".timer-ball") as HTMLElement;
+    const startButton = document.getElementById(
+      "startButton"
+    ) as HTMLButtonElement;
+
+    const totalTime: number = 25 * 60; // 25 minutes in seconds
+    let timeLeft: number = totalTime;
+    let timerId: number;
+
+    function updateTimer(): void {
+      const minutes: number = Math.floor(timeLeft / 60);
+      const seconds: number = timeLeft % 60;
+      const formattedTime: string = `${String(minutes).padStart(
+        2,
+        "0"
+      )}:${String(seconds).padStart(2, "0")}`;
+      timerText.textContent = formattedTime;
+
+      const progress: number = 100 - (timeLeft / totalTime) * 100;
+      timerBackground.style.transform = `rotate(${progress}deg)`;
+      timerBall.style.transform = `translate(-50%, -50%) rotate(-${progress}deg)`;
+    }
+
+    function countdown(): void {
+      if (timeLeft > 0) {
+        timeLeft--;
+        updateTimer();
+      } else {
+        clearInterval(timerId);
+        startButton.disabled = false;
+      }
+    }
+
+    startButton.addEventListener("click", () => {
+      startButton.disabled = true;
+      timerId = setInterval(countdown, 1000);
+    });
+  });
+</script>
+
+<style>
+  .timer-body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .timer-container {
+    position: relative;
+  }
+
+  .timer {
+    position: relative;
+    width: 500px;
+    height: 500px;
+    border-radius: 50%;
+    border: 4px solid rgb(0, 0, 0, 0.3);
+    border-bottom: 4px solid rgb(0, 0, 0, 0);
+    overflow: hidden;
+  }
+
+  .timer-background {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    clip-path: polygon(50% 0%, 0% 0%, 0% 100%, 100% 100%, 100% 0%);
+    transform-origin: bottom;
+    animation: countdown 1500s linear forwards;
+  }
+
+  .timer-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 99px;
+    color: rgb(0, 0, 0, 0.7);
+    font-weight: 700;
+  }
+  #startButton {
+    position: absolute;
+    top: 90%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 25px;
+    color: rgb(0, 0, 0, 0.5);
+    font-weight: 400;
+    border: 4px solid rgb(0, 0, 0, 0.4);
+    border-radius: 40px;
+    padding: 2px 20px;
+  }
+</style>
